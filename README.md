@@ -1,3 +1,8 @@
+<details>
+<summary>
+  <span style="font-size:16px;"><b>Tugas 2 PBP</b></span>
+</summary>
+
 ## Pengimplementasian Checklist
 
  - Pertama, saya membuat sebuah direktori baru pada laptop saya, menginisiasi git dengan `git init`, dan mengkonfigurasi hal-hal yang diperlukan, seperti username dan email serta autentikasi.
@@ -18,7 +23,7 @@
 - Kemudian, saya menambahkan string "localhost, "127.0.0.1" pada ALLOWED_HOST di settings.py dan menonaktifkan virtual environment dengan perintah `deactivate`
 - Setelah itu, saya menambahkan berkas `.gitignore` yang berisikan konfigurasi yang digunakan dalam repositori Git untuk menentukan berkas-berkas dan direktori-direktori yang harus diabaikan oleh Git. Kemudian saya melakukan `add, commit, dan push`.
   
-  ### Membuat Aplikasii Django
+  ### Membuat Aplikasi Django
   - Pertama, saya mengaktifkan virtual environment dengan perintah `env\Scripts\activate`. Setelah itu saya menjalankan perintah `python manage.py startapp main` untuk membuat aplikasi baru bernama main.
   - Setelah itu, saya mendaftarkan aplikasi main ke dalam project dengan menambahkan string 'main' pada file `settings.py` di dalam direktori project 'Sugeng-Avenue'.
   - Kemudian, saya membuat direktori baru bernama 'templates' di dalam direktori aplikasi main dan di dalamnya saya membuat file bernama `main.html` yang berisi `name, price, dan description`.
@@ -39,11 +44,35 @@
 ## BAGAN
 ![image](https://github.com/user-attachments/assets/b6df3c23-49a1-4726-b22f-3e8edaacbc4c)
 
-## Fungsi Git dalam Pengembangan Perangkat Lunak
+## Fungsi Git dalam pengembangan perangkat lunak
 Git memungkinkan para penggunanya untuk dapat bekerja secara kolaboratif atau bekerja sama bersama kelompok, melacak setiap perubahan yang dibuat, dan mengelola perubahan yang terjadi pada kode dari waktu ke waktu. Git memiliki fitur dimana memungkinkan pemilik kode untuk membuat branch untuk mengerjakan fitur atau perbaikan secara terpisah dari branch utama, meminimalisir terjadinya error pada branch utama. 
 
-## Pemilihan Framework Django sebagai Permulaan
+## Pemilihan Framework Django sebagai permulaan
 Sebagai permulaan, penggunaan bahasa python sangat memudahkan para penggunanya karena bahasa python jauh lebih mudah untuk dikenal bagi para pemula. Sebagai mahasiswa yang baru menjalankan 1 tahun perkuliahan di Fasilkom, saya merasa tidak terlalu kesulitan ketika menulis kode dengan bahasa python. Kemudian, Django juga memiliki tutorial dan sumber daya yang banyak untuk mendukung pembelajaran. Django telah digunakan untuk membangun berbagai macam aplikasi web, menunjukkan bahwa Django adalah framework yang dapat diandalkan untuk sebuah project.
 
 ## Alasan model Django disebut sebagai ORM
 Model Django adalah sebuah representasi objek dari data yang akan disimpan ke dalam database. Sebagai contoh, dalam model saya di atas, terdapat atribut name, price, dan description, Django akan membuat tabel model tersebut dengan kolom name, price, dan description. Selain itu, ORM Django terintegrasi secara erat dengan framework Django lainnya, sehingga memudahkan para pengguna juga untuk memabangun sebuah aplikasi web. ORM pada Django memungkinkan pengembangan aplikasi berbasis data menjadi lebih sederhana, cepat, dan mudah dipahami oleh para penggunanya.
+</details>
+
+<details>
+<summary>
+  <span style="font-size:16px;"><b>Tugas 3 PBP</b></span>
+</summary>
+
+## Data Delivery dalam pengimplementasian sebuah platform
+Dalam sebuah platform, data delivery memungkinkan untuk memberikan kita beberapa kemudahan. Dengan adanya sistem data delivery yang efisien, kita bisa memastikan bahwa pengguna menerima data yang relevan dengan kebutuhan mereka, tanpa hambatan, kapan pun dan di mana pun mereka berada. Hal ini pada gilirannya meningkatkan performa platform secara keseluruhan. Beberapa aspek utama yang dipengaruhi oleh efektivitas data delivery meliputi skalabilitas, di mana platform mampu menangani volume data yang terus meningkat seiring dengan pertumbuhan jumlah pengguna dan interaksi keamanan data, yang menjamin bahwa data sensitif terlindungi dari akses yang tidak sah atau manipulasi selama proses pengiriman; serta user experience, yang secara langsung berkaitan dengan kecepatan dan efisiensi data yang diterima pengguna, sehingga menciptakan interaksi yang lebih responsif dan memuaskan.
+
+## XML or JSON? Mengapa JSON lebih populer dibandingkan XML?
+Menurut saya, JSON lebih baik daripada XML karena lebih familiar bagi orang-orang. Namun, tetap antara JSON dan XML memiliki kelebihannya masing-masing. JSON memiliki sintaks yang lebih sederhana dan ringkas, sehingga membuatnya lebih mudah dibaca oleh manusia maupun mesin. JSON memiliki ukuran data yang relatif lebih ringan dan hal ini membuat transmisi data semakin cepat. 
+
+## Fungsi dari Method `is_valid()` dan mengapa kita membutuhkan method tersebut?
+Method `is_valid()` adalah untuk memvalidasi fields yang terdapat pada forms. 
+
+## Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+aw
+
+## Pengimplementasian Checklist
+aw
+
+## Mengakses keempat URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
+aw
