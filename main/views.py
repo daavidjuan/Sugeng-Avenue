@@ -9,7 +9,7 @@ def show_main(request):
     context = {
         'name' : 'Adidas Samba',
         'price': 'Rp. 1.850.000',
-        'description': 'Kalcer bro',
+        'description': 'Kalcer',
         'product_entries': product_entries
     }
 
