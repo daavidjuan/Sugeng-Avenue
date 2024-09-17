@@ -1,8 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
 <h1>Sugeng Avenue</h1>
 
 <h5>Product Name: </h5>
 <p>{{ name }}</p> 
+
 <h5>Price: </h5>
 <p>{{ price }}</p>
+
 <h5>Description: </h5>
 <p>{{ description }}</p>
+
+{% if not mood_entries %}
+<p>Belum ada data product pada Sugeng Avenue.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Description</th>
+  </tr>
+
+  {% comment %} Berikut cara memperlihatkan data product di bawah baris ini 
+  {% endcomment %} 
+  {% for product_entry in product_entries %}
+  <tr>
+    <td>{{product_entry.name}}</td>
+    <td>{{product_entry.price}}</td>
+    <td>{{product_entry.description}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_product_entry' %}">
+  <button>Add New Product Entry</button>
+</a>
+{% endblock content %}
