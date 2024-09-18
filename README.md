@@ -1,3 +1,10 @@
+Nama  : David Juan Ananda
+NPM   : 2306221913
+Kelas : B
+
+Link Deployment PWS : http://david-juan-sugengavenue.pbp.cs.ui.ac.id
+
+
 <details>
 <summary>
   <span style="font-size:16px;"><b>Tugas 2 PBP</b></span>
@@ -66,13 +73,71 @@ Dalam sebuah platform, data delivery memungkinkan untuk memberikan kita beberapa
 Menurut saya, JSON lebih baik daripada XML karena lebih familiar bagi orang-orang. Namun, tetap antara JSON dan XML memiliki kelebihannya masing-masing. JSON memiliki sintaks yang lebih sederhana dan ringkas, sehingga membuatnya lebih mudah dibaca oleh manusia maupun mesin. JSON memiliki ukuran data yang relatif lebih ringan dan hal ini membuat transmisi data semakin cepat. 
 
 ## Fungsi dari Method `is_valid()` dan mengapa kita membutuhkan method tersebut?
-Method `is_valid()` adalah untuk memvalidasi fields yang terdapat pada forms. 
+Method `is_valid()` adalah untuk memvalidasi fields yang terdapat pada forms atau dengan kata lain memastikan jawaban yang dimasukkan ke dalam form sudah benar. Dengan method ini, kita dapat memeriksa fields apakah sudah terisi dengan benar atau belum sehingga data yang masuk difilter dan masuk ke dalam database. 
 
 ## Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
-aw
+`csrf_token` digunakan untuk melindungi dari penyerangan di mana penyerang menjalankan aksi yang tidak diinginkan tanpa sepengetahuan pengguna. `csrf_token` akan memverifikasi setiap tindakan yang dilakukan benar-benar dilakukan oleh pengguna yang seharusnya dan bukan dari sumber eksternal. Jika tidak menambahkan `csrf_token` pada form Django, kemungkinan yang akan terjadi adalah penyerang mendapatkan celah untuk melakukan hal yang tidak diinginkan seperti di atas. Request dari penyerang akan tetap dijalankan karena tidak ada token yang dapat digunakan untuk memverifikasi request dari pengguna.
 
 ## Pengimplementasian Checklist
-aw
+  - Pertama, saya membuat `base.html` sebagai template untuk template html lainnya, kemudian mengedit `TEMPLATES` yang terdapat di `settings.py` agar `base.html` dapat terdeteksi sebagai file template.
+  - Setelah itu, saya mengubah kode pada berkas pada `main.html` sehingga menggunakan `base.html` sebagai template utamanya. 
+  - Kemudian, saya membuat sebuah file bernama `forms.py` untuk membuat suatu struktur form. Tidak lupa, saya mengimport form tersebut pada file `views.py`.
+  - Membuat function `create_product_entry` pada `views.py` untuk menghasilkan form yang dapat menambahkan data Product Entry secara otomatis ketika data di-submit dari form.
+  - Kemudian, mengubah fungsi `show_main` pada `views.py` supaya dapat diakses pada `main.html`.
+  - Membuat file html baru dengan nama `create_product_entry.html` pada `main/templates` dan mengisinya dengan:
+    ```
+    {% extends 'base.html' %} 
+    {% block content %}
+    <h1>Add New Mood Entry</h1>
 
-## Mengakses keempat URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
-aw
+    <form method="POST">
+      {% csrf_token %}
+      <table>
+        {{ form.as_table }}
+        <tr>
+          <td></td>
+          <td>
+            <input type="submit" value="Add Mood Entry" />
+          </td>
+        </tr>
+      </table>
+    </form>
+
+    {% endblock %}
+    ```
+  - Membuat function `show_json` dan `show_xml` pada `views.py` dan menambahkan pada file `urls.py`.
+    - `show_json`
+      ```
+      def show_json(request):
+      data = ProductEntry.objects.all()
+      return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+      ```
+    - `show_xml`
+      ```
+      def show_xml(request):
+      data = ProductEntry.objects.all()
+      return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+      ```
+  - Mengimport kedua function tersebut pada `urls.py` dan membuat url untuk kedua fungsi tersebut agar dapat diakses sesuai url-nya masing-masing.
+  - Membuat function `show_json_by_id` dan `show_xml_by_id` pada `views.py` dan menambahkan pada file `urls.py`.
+    - `show_json_by_id`
+      ```
+      def show_json_by_id(request, id):
+      data = ProductEntry.objects.filter(pk=id)
+      return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+      ```
+    - `show_xml_by_id`
+      ```
+      def show_xml_by_id(request, id):
+      data = ProductEntry.objects.filter(pk=id)
+      return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+      ```
+  - Mengimport kedua function tersebut pada `urls.py` dan membuat url untuk kedua fungsi tersebut agar dapat diakses sesuai url-nya masing-masing.
+
+- XML
+
+- JSON
+
+- XML by id
+
+- JSON by id
