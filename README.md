@@ -135,9 +135,10 @@ Method `is_valid()` adalah untuk memvalidasi fields yang terdapat pada forms ata
   - Mengimport kedua function tersebut pada `urls.py` dan membuat url untuk kedua fungsi tersebut agar dapat diakses sesuai url-nya masing-masing.
 
 - XML
-
+![image](https://github.com/user-attachments/assets/7cdc8593-d3ed-4a67-ab00-3c27f0b0be43)
 - JSON
-
+![image](https://github.com/user-attachments/assets/7f50acd5-29b9-4ffa-a543-5a9334779167)
 - XML by id
-
+![image](https://github.com/user-attachments/assets/7a20c6cc-cdcf-4408-afd2-8558bfff235c)
 - JSON by id
+![image](https://github.com/user-attachments/assets/103d785a-b5ba-4fd5-a4ff-e88df9c9b42a)
