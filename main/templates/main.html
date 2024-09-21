@@ -2,6 +2,9 @@
 {% block content %}
 <h1>Sugeng Avenue</h1>
 
+<p>What's up, {{ user }}? </p>
+<P>Let's check our best selling product!</P>
+
 <h5>Product Name: </h5>
 <p>{{ name }}</p> 
 
@@ -40,4 +43,9 @@
 <a href="{% url 'main:create_product_entry' %}">
   <button>Add New Product Entry</button>
 </a>
+
+<a href="{% url 'main:logout' %}">
+  <button>Logout</button>
+</a>
+<h5>Sesi terakhir login: {{ last_login }}</h5>
 {% endblock content %}
