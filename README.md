@@ -142,3 +142,18 @@ Method `is_valid()` adalah untuk memvalidasi fields yang terdapat pada forms ata
 ![image](https://github.com/user-attachments/assets/7a20c6cc-cdcf-4408-afd2-8558bfff235c)
 - JSON by id
 ![image](https://github.com/user-attachments/assets/103d785a-b5ba-4fd5-a4ff-e88df9c9b42a)
+
+<details>
+<summary>
+  <span style="font-size:16px;"><b>Tugas 4 PBP</b></span>
+</summary>
+
+## Perbedaan antara `HttpResponseRedirect()` dan `redirect()`
+
+## Cara kerja penghubungan model `Product` dengan `User`
+
+## Perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+
+## Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+
+## Pengimplementasian Checklist
