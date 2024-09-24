@@ -142,6 +142,7 @@ Method `is_valid()` adalah untuk memvalidasi fields yang terdapat pada forms ata
 ![image](https://github.com/user-attachments/assets/7a20c6cc-cdcf-4408-afd2-8558bfff235c)
 - JSON by id
 ![image](https://github.com/user-attachments/assets/103d785a-b5ba-4fd5-a4ff-e88df9c9b42a)
+</details>
 
 <details>
 <summary>
@@ -149,11 +150,23 @@ Method `is_valid()` adalah untuk memvalidasi fields yang terdapat pada forms ata
 </summary>
 
 ## Perbedaan antara `HttpResponseRedirect()` dan `redirect()`
+`HttpResponseRedirect()` adalah suatu kelas yang bawaan Django, digunakan untuk membuat redirect response. Kelas ini menerima URL secara eksplisit sebagai argumen. `redirect()` dirancang untuk menyederhanakan redirect yang dilakukan. `redirect()` dapat menerima view atau model.
 
 ## Cara kerja penghubungan model `Product` dengan `User`
+- Menambahkan `ForeignKey` ke dalam model untuk menghubungkan model Product dengan User. Dengan menambahkan `ForeignKey`, setiap produk terkait dengan satu pengguna, dan satu pengguna dapat memiliki banyak produk. Selain itu, saya menggunakan `on_delete=models.CASCADE`, yang artinya jika pengguna dihapus, semua produk yang terkait dengan pengguna tersebut juga akan dihapus.
+
+- Untuk menetapkan pengguna yang membuat entri produk baru, field `user` di model Product akan diisi dengan pengguna yang sedang login. Hal ini dilakukan dengan memodifikasi fungsi `create_product_entry`, di mana pengguna yang sedang login dapat membuat entri produk baru melalui form. Penggunaan `commit=False` memungkinkan kita menambahkan informasi pengguna terlebih dahulu sebelum menyimpan objek ke dalam database, sehingga objek dapat dimodidifikasi sebelum proses penyimpanan.
+
+- Pada fungsi `show_main`,  menambahkan kode `product_entries = Product.objects.filter(user=request.user)`, yang berfungsi untuk menampilkan semua entri produk yang terkait dengan pengguna yang sedang login.
 
 ## Perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+- Autentikasi adalah proses untuk memverifikasi identitas user yang berusaha untuk login. Proses ini benar-benar menentukan user yang sah untuk dapat mengakses program tersebut. Hal yang dilakukan saat pengguna login adalah memeriksa apakah username dan password sesuai dengan yang ada di database, kemudian jika sudah terauntentikasi user tersebut akan diberikan akses untuk melanjutkan ke sistem, kemudian informasi login akan disimpan dalam session.
+Django memiliki fungsi seperti authenticate() dan login() untuk memverifikasi kredensial dan memulai session pengguna.
+- Otorisasi adalah proses untuk menentukan apakah seoarang user yang sudah terauntentikasi memiliki izin atau hak untuk mengakses program. Setelah pengguna login (terautentikasi), Django akan memeriksa apakah pengguna tersebut memiliki izin yang diperlukan untuk mengakses halaman atau fungsi tertentu. Misalnya, hanya pengguna dengan peran admin yang dapat mengakses panel admin. 
 
 ## Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+Django mengingat pengguna yang telah login menggunakan Session ID, yang disimpan dalam bentuk cookie di browser pengguna. Setiap kali pengguna mengirimkan request baru ke server, cookie yang berisi Session ID akan dikirim bersama request HTTP tersebut. Django kemudian memeriksa cookie tersebut untuk mendapatkan Session ID dan mencocokkannya dengan data session yang tersimpan di server. Jika Session ID valid dan sesuai dengan data di server, Django akan mengenali bahwa pengguna tersebut masih dalam keadaan terautentikasi dan login. Untuk menjaga keamanan, cookie sebaiknya diberi flag HttpOnly dan secure. Hal ini mencegah cookie diakses oleh skrip berbahaya dan memastikan cookie hanya dikirim melalui koneksi yang aman. Dengan mengikuti praktik terbaik, penggunaan cookie secara default bisa menjadi lebih aman bagi developer.
+
 
 ## Pengimplementasian Checklist
+</details>
