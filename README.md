@@ -169,4 +169,62 @@ Django mengingat pengguna yang telah login menggunakan Session ID, yang disimpan
 
 
 ## Pengimplementasian Checklist
+- Sebelum membuat fungsi login dan logout, diperlukan adanya fungsi untuk registrasi. Dimulai dengan import `UserCreationForm` dan `messages` pada `views.py` dan menambahkan fungsi `register` yang berisi : 
+  ```
+  def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+  ```
+  Tidak lupa dengan membuat sebuah file html baru bernama `register.html` pada `main/templates`. Fungsi login dilakukan dengan import `authenticate`, `login`, dan `AuthenticationForm` pada `views.py`. Setelah itu menambahkan fungsi `login_user` berisi :
+  ```
+  def login_user(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+
+        if form.is_valid():
+              user = form.get_user()
+              login(request, user)
+              return redirect('main:show_main')
+
+    else:
+        form = AuthenticationForm(request)
+    context = {'form': form}
+    return render(request, 'login.html', context)
+  ```
+  Kemudian membuat `login.html` pada `main/templates`. Fungsi logout dilakukan dengan import `logout` pada `views.py`. Setelah itu menambahkan `logout_user` pada `views.py`. Kemudian menambahkan button logout pada file `main.html`.
+
+- Untuk menghubungkan model `Product` dengan `User`, import `User` pada `models.py`. Kemudian menambahkan `user = models.ForeignKey(User, on_delete=models.CASCADE)` pada model `ProductEntry`. Setelah itu pada fungsi `create_product_entry`, menambahkan `product_entry` untuk menerima parameter `commit=False` dan mengganti `product_entry.user` menjadi `request.user`. Begitu juga pada `show_main`. Terakhir, pada `settings.py`, menambahkan import os dan mengubah variabel DEBUG pada `settings.py` dengan :
+  ```
+  PRODUCTION = os.getenv("PRODUCTION", False)
+  DEBUG = not PRODUCTION  
+  ```
+
+- Untuk menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi, pertama-tama menambahkan import `HttpResponseRedirect`, `reverse`, dan `datetime` pada `views.py`. Kemudian memodifikasi kode pada `login_user` menjadi :
+  ```
+  if form.is_valid():
+    user = form.get_user()
+    login(request, user)
+    response = HttpResponseRedirect(reverse("main:show_main"))
+    response.set_cookie('last_login', str(datetime.datetime.now()))
+    return response
+  ```
+  Setelah itu, menambahkan `'last_login': request.COOKIES['last_login']` pada fungsi `show_main` pada variabel `context`. Setelah itu mengganti `logout_user` menjadi :
+  ```
+  def logout_user(request):
+    logout(request)
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
+  ```
+  Kemudian, menambahkan text sesi terakhir login pada `main.html`.
+
+
 </details>
