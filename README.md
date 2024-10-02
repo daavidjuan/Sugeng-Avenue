@@ -240,10 +240,10 @@ Terdapat istilah CSS specificity yang digunakan untuk menentukan prioritas pener
 - Aturan !important: Aturan ini mengesampingkan semua gaya lainnya, termasuk inline styles.
 - Inline Styles: Gaya yang diterapkan langsung pada elemen HTML melalui atribut style memiliki prioritas lebih tinggi dibandingkan semua selector CSS lainnya.
 - ID Selector (#): Selector ini diterapkan pada elemen yang memiliki atribut id.
-- Pseudo-Class Selector (:): Selector ini digunakan pada elemen dalam kondisi tertentu, seperti :hover, :focus, atau :nth-child().
-- Attribute Selector ([]): Selector ini digunakan untuk elemen berdasarkan atributnya, seperti [type="text"] atau [href].
+- Pseudo-Class Selector (:): Selector ini digunakan pada elemen dalam kondisi tertentu, seperti `:hover`, `:focus`, atau `:nth-child()`.
+- Attribute Selector ([]): Selector ini digunakan untuk elemen berdasarkan atributnya, seperti `[type="text"]` atau `[href]`.
 - Class Selector (.): Selector ini diaplikasikan pada elemen yang memiliki atribut class dan memiliki prioritas lebih tinggi daripada selector elemen.
-- Element Type Selector: Selector ini mengacu pada elemen HTML seperti <div>, <p>, atau <h1>.
+- Element Type Selector: Selector ini mengacu pada elemen HTML seperti `<div>`, `<p>`, atau `<h1>`.
 - Universal Selector (*): Selector ini memiliki prioritas terendah dan berlaku untuk semua elemen.
 
 ## Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
