@@ -228,3 +228,86 @@ Django mengingat pengguna yang telah login menggunakan Session ID, yang disimpan
 
 
 </details>
+
+<details>
+<summary>
+  <span style="font-size:16px;"><b>Tugas 5 PBP</b></span>
+</summary>
+
+## Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+Terdapat istilah CSS specificity yang digunakan untuk menentukan prioritas penerapan aturan styling. CSS specificity dapat dihitung melalui selector dan menggunakan sistem bilangan desimal. Berikut adalah urutan prioritas CSS selector dari yang tertinggi hingga terendah:
+
+- Aturan !important: Aturan ini mengesampingkan semua gaya lainnya, termasuk inline styles.
+- Inline Styles: Gaya yang diterapkan langsung pada elemen HTML melalui atribut style memiliki prioritas lebih tinggi dibandingkan semua selector CSS lainnya.
+- ID Selector (#): Selector ini diterapkan pada elemen yang memiliki atribut id.
+- Pseudo-Class Selector (:): Selector ini digunakan pada elemen dalam kondisi tertentu, seperti :hover, :focus, atau :nth-child().
+- Attribute Selector ([]): Selector ini digunakan untuk elemen berdasarkan atributnya, seperti [type="text"] atau [href].
+- Class Selector (.): Selector ini diaplikasikan pada elemen yang memiliki atribut class dan memiliki prioritas lebih tinggi daripada selector elemen.
+- Element Type Selector: Selector ini mengacu pada elemen HTML seperti <div>, <p>, atau <h1>.
+- Universal Selector (*): Selector ini memiliki prioritas terendah dan berlaku untuk semua elemen.
+
+## Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+Pengalaman User yang Lebih Baik: design responsif memastikan website tampil dan berfungsi dengan optimal di berbagai perangkat, mulai dari desktop hingga smartphone, sehingga memberikan pengalaman yang konsisten dan nyaman bagi user.
+
+Peningkatan Traffic Seluler: Dengan semakin banyaknya user yang mengakses web melalui perangkat seluler, memiliki situs yang ramah seluler menjadi sangat penting. design responsif membantu menarik dan mempertahankan pengunjung dari kalangan ini.
+
+SEO yang Lebih Optimal: Mesin pencari seperti Google memberikan prioritas lebih tinggi kepada situs yang dioptimalkan untuk seluler. Dengan design responsif, visibilitas dan peringkat situs di mesin pencari dapat meningkat secara signifikan.
+
+Efisiensi Biaya: Daripada membuat situs terpisah untuk perangkat yang berbeda, design responsif memungkinkan Anda mengelola satu situs yang dapat menyesuaikan dengan berbagai ukuran layar, sehingga menghemat waktu dan biaya pengembangan.
+
+Kesiapan Masa Depan: Seiring dengan munculnya perangkat baru dengan ukuran dan resolusi layar yang bervariasi, design responsif memastikan situs Anda tetap dapat diakses dan berfungsi dengan baik di perangkat-perangkat tersebut.
+
+Contoh aplikasi yang sudah menggunakan design responsif:
+- Google
+- YouTube
+Contoh aplikasi yang belum menggunakan design responsif:
+- SiakNG
+
+## Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+Margin adalah jarak antara elemen dan elemen lain di luar kotak elemen tersebut. Margin menciptakan ruang di luar batas elemen. Margin dapat diatur dengan properti margin, yang bisa diterapkan ke semua sisi atau sisi tertentu (atas, kanan, bawah, kiri). 
+  '''
+  div {
+  margin-top: 10px;
+  margin-right: 15px;
+  margin-bottom: 20px;
+  margin-left: 25px;
+  }
+  '''
+
+Border adalah garis yang mengelilingi elemen. Border berada di antara margin dan padding, membungkus elemen serta padding-nya. Border dapat diatur menggunakan properti border yang mencakup lebar, gaya, dan warna, atau properti spesifik seperti border-width, border-style, dan border-color.
+  '''
+  div {
+  border-top: 3px dashed red;
+  border-right: 4px dotted blue;
+  border-bottom: 5px double green;
+  border-left: 6px solid orange;
+  }
+  '''
+
+Padding adalah jarak antara konten elemen dan batas dalam (border) elemen tersebut. Padding menciptakan ruang di dalam elemen, di sekitar konten elemen. Padding bisa diatur dengan properti padding, baik untuk semua sisi atau secara spesifik untuk tiap sisi.
+  '''
+  div {
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  }
+  '''
+
+## Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+CSS Flexbox adalah sistem tata letak satu dimensi yang digunakan untuk mendistribusikan dan menyelaraskan ruang antara item dalam suatu container. Flexbox sangat berguna untuk menciptakan tata letak responsif yang menyesuaikan dengan berbagai ukuran layar dan perangkat, tanpa perlu banyak menggunakan properti seperti `float` dan `position` dalam kode CSS. Flexbox memudahkan pengaturan tata letak horizontal atau vertikal elemen-elemen di dalam container.
+
+Di sisi lain, CSS Grid Layout adalah sistem tata letak dua dimensi yang memungkinkan pengaturan elemen dalam bentuk baris dan kolom. Grid Layout ideal untuk membuat tata letak yang lebih kompleks dan terstruktur, memudahkan pengelolaan elemen-elemen di halaman web secara fleksibel dan terorganisir, baik secara horizontal maupun vertikal.
+
+## Implementasi Checklist
+- Pertama, saya mengintegrasikan Tailwind CSS ke aplikasi dengan memodifikasi file base.html, menambahkan tag `<meta name="viewport">` dan menyertakan `<script src="https://cdn.tailwindcss.com">`. Setelah itu, saya mengimplementasikan fitur Edit Product dengan memodifikasi `views.py`, membuat fungsi baru bernama `edit_product` yang menerima parameter `request` dan `id`. Saya juga menambahkan import `reverse` dan `HttpResponseRedirect`.
+- Selanjutnya, saya membuat file HTML baru bernama `edit_product.html`, yang memungkinkan pengeditan input dari form yang sudah ada, dengan tampilan yang sama seperti di `create_product_entry.html`. Saya kemudian memperbarui `urls.py` untuk menambahkan path baru untuk fitur edit.
+- Setelah itu, saya mengimplementasikan fitur delete product dengan menambahkan fungsi baru di `views.py`, mengikuti tutorial, dan menambahkan path URL baru untuk fitur tersebut.
+- Kemudian, saya membuat navigation bar dengan menambahkan file `navbar.html` yang berisi desain dengan background putih eperti "Home" dan "About", juga menampilkan pesan selamat datang dengan {{nama}}, serta tombol logout. Untuk saat ini, navbar masih bersifat dummy kecuali tombol logout. Saya juga menambahkan logo_sugengavenue.png di bagian navbar.
+- Setelah membuat navbar, fitur edit, dan delete product, saya mengonfigurasi static files dalam aplikasi dengan memodifikasi `settings.py`, menambahkan `'whitenoise.middleware.WhiteNoiseMiddleware'` ke bagian `MIDDLEWARE`, serta mengatur `STATIC_ROOT`, `STATICFILES_DIRS`, dan `STATIC_URL`.
+- Saya juga menambahkan file `global.css` di folder `static/css`, berisi desain custom saya. Kemudian, saya memodifikasi `base.html` agar `global.css` bisa digunakan di seluruh template Django.
+- Selanjutnya, saya menata ulang `login.html`, `register.html`, dan `create_product_entry.html` menggunakan styling dari Tailwind. Untuk `login.html`, saya menambahkan gambar statis bernama logo_sugengavenue.png, yang ditampilkan di sebelah form login. Selain itu, saya juga menambahkan logo_sugengavenue.png di `main.html`.
+- Saya juga membuat file `card_mood.html`, yang berfungsi untuk menampilkan card baru setiap kali ada entri produk baru, lengkap dengan tombol untuk edit dan delete product. Selain itu, saya menambahkan sandal-jepit.png di setiap produk yang ditambahkan.
+- Setelah menyelesaikan semua file HTML di folder template, saya memodifikasi `main.html` agar seluruh file HTML lain terintegrasi dengan baik.
+
+</details>
