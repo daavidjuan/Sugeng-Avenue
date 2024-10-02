@@ -1,51 +1,48 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Sugeng Avenue</title>
+{% endblock meta %}
 {% block content %}
-<h1>Sugeng Avenue</h1>
+{% include 'navbar.html' %}
 
-<p>What's up, {{ user }}? </p>
-<P>Let's check our best selling product!</P>
-
-<h5>Product Name: </h5>
-<p>{{ name }}</p> 
-
-<h5>Price: </h5>
-<p>{{ price }}</p>
-
-<h5>Description: </h5>
-<p>{{ description }}</p>
-
-{% if not product_entries %}
-<p>Belum ada data product pada Sugeng Avenue.</p>
-{% else %}
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Description</th>
-    <th>Rating</th>
-  </tr>
-
-  {% comment %} Berikut cara memperlihatkan data product di bawah baris ini 
-  {% endcomment %} 
-  {% for product_entry in product_entries %}
-  <tr>
-    <td>{{product_entry.name}}</td>
-    <td>{{product_entry.price}}</td>
-    <td>{{product_entry.description}}</td>
-    <td>{{product_entry.rating}}</td>
-  </tr>
-  {% endfor %}
-</table>
-{% endif %}
-
-<br />
-
-<a href="{% url 'main:create_product_entry' %}">
-  <button>Add New Product Entry</button>
-</a>
-
-<a href="{% url 'main:logout' %}">
-  <button>Logout</button>
-</a>
-<h5>Sesi terakhir login: {{ last_login }}</h5>
+<div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gray-100 flex flex-col">
+    <div class="flex items-center justify-center mb-10">
+      <div class="w-70 h-70">
+        <img src="{% static 'image/logo_sugengavenue.png' %}" alt="Sugeng Avenue Logo" class="object-contain">
+      </div>
+      <div class="ml-6 max-w-lg text-justify">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-2">Sugeng Avenue E-commerce</h2>
+        <p class="text-gray-700">
+          Sugeng Avenue adalah sebuah platform e-commerce yang dibangun oleh seorang mahasiswa Fasilkom UI angkatan 2023. 
+          Platform ini bertujuan untuk memberikan kemudahan dalam jual beli produk-produk lokal yang berkualitas, 
+          dengan interface yang sederhana namun elegan. Melalui Sugeng Avenue, kami ingin membantu meningkatkan keterhubungan 
+          antara konsumen dan produsen lokal.
+        </p>
+      </div>
+    </div>
+    
+    <div class="flex justify-end mb-6">
+        <a href="{% url 'main:create_product_entry' %}" class="bg-green-500 hover:bg-green-00 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+            Add New Product Entry
+        </a>
+    </div>
+    
+    {% if not product_entries %}
+    <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+        <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+        <p class="text-center text-gray-600 mt-4">Belum ada data product pada Sugeng Avenue.</p>
+    </div>
+    {% else %}
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full">
+        {% for product_entry in product_entries %}
+            {% include 'card_product.html' with product_entry=product_entry %}
+        {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <div class="px-3 mb-1 bg-white-600"></div>
+    <p class="text-black text-center">Last Login: {{last_login}}</p>
+  </div>
 {% endblock content %}
