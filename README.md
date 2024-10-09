@@ -311,3 +311,57 @@ Di sisi lain, CSS Grid Layout adalah sistem tata letak dua dimensi yang memungki
 - Setelah menyelesaikan semua file HTML di folder template, saya memodifikasi `main.html` agar seluruh file HTML lain terintegrasi dengan baik.
 
 </details>
+
+<details>
+<summary>
+  <span style="font-size:16px;"><b>Tugas 6 PBP</b></span>
+</summary>
+
+## Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+JavaScript adalah bahasa pemrograman tingkat tinggi yang bersifat cross-platform dan mendukung berbagai paradigma. Dalam pengembangan aplikasi web, JavaScript sangat populer karena memungkinkan perubahan halaman web secara dinamis dan meningkatkan interaksi antara halaman dan user. Beberapa manfaat utama JavaScript meliputi:
+- Interaktivitas: JavaScript memungkinkan pengembang menambahkan elemen interaktif, seperti validasi form, manipulasi DOM, dan animasi, yang membuat halaman web terasa lebih hidup dan dinamis.
+- Pemrosesan Asinkron: Dengan memanfaatkan AJAX atau Fetch API, JavaScript dapat mengambil atau mengirim data ke server tanpa harus memuat ulang seluruh halaman, memberikan pengalaman yang lebih cepat.
+- Pengalaman User yang Lebih Baik: JavaScript membantu meningkatkan kecepatan respons halaman, memungkinkan proses berjalan secara real-time, dan memperbarui konten tertentu tanpa mengganggu aktivitas user pada halaman tersebut.
+
+## Jelaskan fungsi dari penggunaan `await` ketika kita menggunakan `fetch()!` Apa yang akan terjadi jika kita tidak menggunakan `await`?
+`await` digunakan untuk menunggu penyelesaian dari sebuah promise. Dalam konteks `fetch()`, `await` digunakan untuk menunggu respons dari permintaan HTTP yang dikirim ke server. Tanpa `await`, JavaScript akan melanjutkan eksekusi kode berikutnya tanpa menunggu respons dari `fetch()`, yang dapat menyebabkan masalah jika ada kode yang bergantung pada hasil respons tersebut. 
+
+Jika `await` tidak digunakan, kode setelah `fetch()` akan dijalankan sebelum permintaan selesai, sehingga variabel yang seharusnya berisi data dari respons mungkin belum terisi dengan benar. Hal ini dapat menyebabkan perilaku yang tidak diinginkan karena proses `fetch()` belum selesai.
+
+## Mengapa kita perlu menggunakan decorator `csrf_exempt` pada view yang akan digunakan untuk AJAX `POST`?
+Decorator `csrf_exempt` digunakan untuk menonaktifkan pemeriksaan CSRF token pada view tertentu yang menerima permintaan `POST` dari AJAX. Secara default, Django mengharuskan setiap `POST` request disertai CSRF token sebagai langkah pengamanan untuk melindungi aplikasi dari serangan Cross-Site Request Forgery (CSRF), yang memungkinkan penyerang mengirimkan permintaan atas nama pengguna yang sah. Namun, dalam beberapa kasus, seperti ketika menggunakan AJAX `POST`, CSRF token mungkin tidak disertakan secara otomatis.
+
+Oleh karena itu, pada view seperti `add_product_entry_ajax` di `main/views.py`, decorator `csrf_exempt` digunakan untuk menonaktifkan pengecekan CSRF, sehingga permintaan `POST` dari AJAX tetap dapat diproses. Namun, menonaktifkan CSRF harus dilakukan dengan sangat hati-hati. Jika tidak, hal ini dapat membuka celah keamanan dan membuat aplikasi rentan terhadap serangan. Oleh sebab itu, sangat penting untuk memastikan ada langkah-langkah pengamanan lain yang diterapkan ketika CSRF dinonaktifkan, seperti membatasi akses hanya ke pengguna atau aplikasi yang tepercaya.
+
+## Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+Validasi dan pembersihan data di frontend (JavaScript) bisa dilewati atau dimanipulasi oleh pengguna, misalnya dengan menggunakan developer tools. Oleh karena itu, membersihkan data hanya di frontend tidak cukup aman. Di backend, pembersihan data memastikan bahwa data yang diterima server benar-benar aman, melindungi dari ancaman seperti SQL Injection dan XSS. Selain itu, pengembang memiliki kontrol penuh di backend terkait bagaimana data diproses dan divalidasi, sehingga tidak bergantung pada kondisi di frontend atau browser pengguna. Karena validasi dan sanitasi di frontend bisa diabaikan oleh pengguna, misalnya dengan menonaktifkan JavaScript, backend menjadi lapisan terakhir yang memastikan semua data sudah aman dan valid. Backend juga berperan dalam memastikan bahwa data yang diterima sesuai dengan aturan yang ditetapkan, seperti tipe data, format, atau nilai yang benar, sehingga menjaga konsistensi dan akurasi.
+
+## Pengimplementasian Checklist
+Pertama, saya membuat suatu function `add_product_entry_ajax` untuk menambahkan suatu product baru ke basis data AJAX.
+  ```
+  @csrf_exempt
+  @require_POST
+  def add_product_entry_ajax(request):
+    name = strip_tags(request.POST.get("name"))
+    price = request.POST.get("price")
+    description = strip_tags(request.POST.get("description"))
+    rating = request.POST.get("rating")
+    user = request.user
+
+    new_product = ProductEntry(
+        name=name, price=price, 
+        description=description,
+        rating=rating,
+        user=user
+    )
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)
+  ```
+Setelah itu, saya melakukan routing dengan mengimport fungsi tersebut ke `urls.py` dan menambahkan path url ke dalam `urlpatterns` agar dapat mengakses fungsi tersebut. Untuk menampilkan data produk secara dinamis menggunakan `fetch()` API, saya melakukan beberapa perubahan pada kode. Ssaya menghapus `product_entries = Product.objects.filter(user=request.user)` serta `'product_entries': product_entries` dari `main/views.py`. Lalu, saya memodifikasi baris pertama pada fungsi show_json dan show_xml dengan mengganti menjadi `data = ChocolateProduct.objects.filter(user=request.user)` untuk hanya menampilkan produk yang dimiliki oleh pengguna yang sedang login.
+
+Di `template main/templates/main.html`, saya menghapus blok kondisional yang sebelumnya digunakan untuk menampilkan produk secara statis dan menggantinya dengan `<div id="product_entry_cards"></div>`. Saya membuat fungsi JavaScript bernama `getProductEntries()` yang menggunakan `fetch()` untuk mengambil data produk dalam format JSON dari URL yang hanya mengembalikan produk milik pengguna yang sedang login. Setelah itu, data produk ini akan diteruskan ke fungsi `refreshProductEntries()` yang bertugas menampilkan data tersebut dalam elemen div yang sudah disediakan.
+
+Selain itu, saya menambahkan sebuah tombol di `main/templates/main.html` yang akan membuka modal berisi form untuk menambahkan produk baru ketika ditekan. Tombol ini memanggil fungsi JavaScript `showModal()` untuk menampilkan modal tersebut. Di dalam modal, terdapat form dengan field seperti `name`, `price`, `description`, dan `rating` yang nantinya akan dikirimkan ke server melalui AJAX `POST`.
+
+Selanjutnya, saya membuat fungsi JavaScript `addProductEntry()` yang bertugas mengirimkan data produk baru ke server menggunakan `POST` request melalui `fetch()`. Fungsi ini mengirim permintaan POST ke URL /create-product-entry-ajax/ untuk menambahkan produk baru. Setelah produk berhasil ditambahkan, fungsi refreshProductEntries() dipanggil untuk memperbarui daftar produk tanpa perlu me-refresh halaman. Selain itu, form di dalam modal akan di-reset, dan modal akan ditutup setelah produk ditambahkan.
